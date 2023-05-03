@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import TracksGain from './tracks-gain'
 import TracksFilter from './tracks-filter'
+import Visuals from '../visuals/index'
 import { filterRanges } from '../../helpers/trackDefaults'
 import './index.css'
 
@@ -91,6 +92,7 @@ const AudioParameters = () => {
 
   return (
     <div className="audio-controls">
+      <Visuals trackParams={trackParams} />
       <div className="gain-sliders-container">
         {trackParams.map((params) => {
           return (

@@ -135,3 +135,28 @@ input:active {
 .toggle-high {
   background: gray
 }
+
+.visuals {
+  display: flex;
+  justify-content: space-around;
+}
+
+#rumble-gradient {
+  stop-color: #d56462;
+}
+
+#low-gradient {
+  stop-color: #D48987;
+}
+
+#midLow-gradient {
+  stop-color: #ffc3c0;
+}
+
+#midHigh-gradient {
+  stop-color: blue
+}
+
+#high-gradient {
+  stop-color: gray
+}
