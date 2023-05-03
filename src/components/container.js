@@ -4,22 +4,16 @@ import ActiveToggle from './active-toggle'
 
 const Container = () => {
   const [isRunning, setIsRunning] = useState(false)
-  const [showSection, setShowSection] = useState(true)
 
   return (
-    <div className="grid">
-      <div className="main-display">
-        <Audio isRunning={isRunning} showSection={showSection} />
+    <>
+      <div>
+        <Audio isRunning={isRunning} />
       </div>
-      <div className="start row">
-        <ActiveToggle
-          isRunning={isRunning}
-          setIsRunning={setIsRunning}
-          setShowSection={setShowSection}
-          showSection={showSection}
-        />
+      <div>
+        <ActiveToggle isRunning={isRunning} setIsRunning={setIsRunning} />
       </div>
-    </div>
+    </>
   )
 }
 

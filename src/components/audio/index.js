@@ -11,9 +11,10 @@ import {
 } from './audio.helpers'
 import TracksFilterToggle from './tracks-filter-toggle'
 
-// will try to one once on load, cannot initialize before user action per web audio
+// will try to run once on load, cannot initialize before user action per web audio
 const audioContext = new AudioContext()
 const gainNode = audioContext.createGain()
+// this context and audio graph will be assembled in the audio obj
 const audio = {
   context: audioContext,
   graph: {
@@ -61,6 +62,7 @@ const AudioParameters = ({ isRunning }) => {
     }
   }
 
+  // todo
   useEffect(() => {
     !isRunning ? handleStop() : handleStart()
   }, [isRunning])
