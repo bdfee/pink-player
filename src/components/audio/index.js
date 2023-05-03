@@ -32,34 +32,40 @@ const AudioParameters = ({ isRunning }) => {
       gain: 0.6,
       highpassFreq: 30,
       lowpassFreq: 60
-    },
-    {
-      id: 'midPink',
-      gain: 0.1,
-      highpassFreq: 80,
-      lowpassFreq: 300
-    },
-    {
-      id: 'highPink',
-      gain: 0.4,
-      highpassFreq: 10000,
-      lowpassFreq: 12000
     }
+    // {
+    //   id: 'midPink',
+    //   gain: 0.1,
+    //   highpassFreq: 80,
+    //   lowpassFreq: 300
+    // },
+    // {
+    //   id: 'highPink',
+    //   gain: 0.4,
+    //   highpassFreq: 10000,
+    //   lowpassFreq: 12000
+    // }
   ])
 
-  const filterDefaults = {
+  const filterRanges = {
     lowPink: {
-      min: 0,
-      max: 70
-    },
-    midPink: {
-      min: 80,
-      max: 5000
-    },
-    highPink: {
-      min: 8000,
-      max: 14000
+      lowpass: {
+        min: 0,
+        max: 70
+      },
+      highpass: {
+        min: 0,
+        max: 70
+      }
     }
+    // midPink: {
+    //   min: 80,
+    //   max: 5000
+    // },
+    // highPink: {
+    //   min: 8000,
+    //   max: 14000
+    // }
   }
 
   // todo
@@ -126,7 +132,7 @@ const AudioParameters = ({ isRunning }) => {
                 key={params.id}
                 showFilter={showFilter}
                 params={params}
-                trackFilterDefaults={filterDefaults[params.id]}
+                rangeDefaults={filterRanges[params.id]}
                 trackParams={trackParams}
                 setParams={setTrackParams}
                 trackNodes={audio.graph.tracks[params.id]}
