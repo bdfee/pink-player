@@ -96,26 +96,42 @@ input:active {
 }
 
 /* track wide styles */
-.lowPink {
+.rumble {
   accent-color: #d56462;
 }
 
-.midPink {
+.low {
   accent-color: #D48987;
 }
 
-.highPink {
+.midLow {
   accent-color: #ffc3c0;
 }
 
-.toggle-lowPink {
+.midHigh {
+  accent-color: blue
+}
+
+.high {
+  accent-color: gray
+}
+
+.toggle-rumble {
   background: #d56462;
 }
 
-.toggle-midPink {
+.toggle-low {
   background: #D48987;
 }
 
-.toggle-highPink {
+.toggle-midLow {
   background: #ffc3c0;
+}
+
+.toggle-midHigh {
+  background: blue
+}
+
+.toggle-high {
+  background: gray
 }

@@ -6,9 +6,14 @@ const TracksFilter = ({
   setParams,
   trackNodes,
   context,
-  trackFilterDefaults,
+  rangeDefaults,
   showFilter
 }) => {
+  const {
+    highpass: { min: hpMin, max: hpMax },
+    lowpass: { min: lpMin, max: lpMax }
+  } = rangeDefaults
+
   const handleSetParams = (e) => {
     const value = Number(e.target.value)
     const id = e.target.parentElement.id
@@ -23,7 +28,7 @@ const TracksFilter = ({
           trackNodes.lowpassFilter.frequency.value = value
           break
         case 'highpassFreq':
-          trackNodes.highpassFilter.frequency.value = reverseValue(value)
+          trackNodes.highpassFilter.frequency.value = reverseHighpassValue(value)
           break
       }
     }
@@ -42,11 +47,9 @@ const TracksFilter = ({
     display: showFilter === id ? 'flex' : 'none'
   }
 
-  const { min, max } = trackFilterDefaults
-
-  const reverseValue = (value) => {
-    const percent = (value - min) / (max - min)
-    return percent * (min - max) + max
+  const reverseHighpassValue = (value) => {
+    const percent = (value - hpMin) / (hpMax - hpMin)
+    return percent * (hpMin - hpMax) + hpMax
   }
 
   const mobileClass = isMobile ? '-mobile' : ''
@@ -57,9 +60,9 @@ const TracksFilter = ({
         <input
           className={`filter-slider${mobileClass}`}
           orient="horizontal"
-          min={min}
+          min={hpMin}
           name={'highpassFreq'}
-          max={max}
+          max={hpMax}
           step={1}
           type="range"
           value={highpassFreq}
@@ -70,8 +73,8 @@ const TracksFilter = ({
       <div className={`filter-slider-container${mobileClass} ${id}`} id={id}>
         <input
           className={`filter-slider${mobileClass}`}
-          min={min}
-          max={max}
+          min={lpMin}
+          max={lpMax}
           orient="horizontal"
           name={'lowpassFreq'}
           step={1}

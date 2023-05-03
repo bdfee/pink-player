@@ -1,5 +1,5 @@
 const TracksFilterToggle = ({ showFilter, setShowFilter, params }) => {
-  const { id } = params
+  const { id, name } = params
 
   const selectedClass = showFilter === id ? `toggle-${id}` : ''
 
@@ -9,7 +9,7 @@ const TracksFilterToggle = ({ showFilter, setShowFilter, params }) => {
       onClick={() => {
         setShowFilter(id)
       }}>
-      {id}
+      {name}
     </div>
   )
 }
