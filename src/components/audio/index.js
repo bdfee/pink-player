@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import TracksGain from './tracks-gain'
 import TracksFilter from './tracks-filter'
+import { filterRanges } from './trackDefaults'
 import './index.css'
 
 import {
@@ -28,45 +29,41 @@ const AudioParameters = ({ isRunning }) => {
   const [showFilter, setShowFilter] = useState('lowPink')
   const [trackParams, setTrackParams] = useState([
     {
-      id: 'lowPink',
+      id: 'rumble',
+      name: 'rumble',
       gain: 0.6,
       highpassFreq: 30,
       lowpassFreq: 60
+    },
+    {
+      id: 'low',
+      name: 'low',
+      gain: 0.6,
+      highpassFreq: 60,
+      lowpassFreq: 200
+    },
+    {
+      id: 'midLow',
+      name: 'wind',
+      gain: 0.1,
+      highpassFreq: 200,
+      lowpassFreq: 500
+    },
+    {
+      id: 'midHigh',
+      name: 'rain',
+      gain: 0.1,
+      highpassFreq: 500,
+      lowpassFreq: 3000
+    },
+    {
+      id: 'high',
+      name: 'hiss',
+      gain: 0.4,
+      highpassFreq: 10000,
+      lowpassFreq: 12000
     }
-    // {
-    //   id: 'midPink',
-    //   gain: 0.1,
-    //   highpassFreq: 80,
-    //   lowpassFreq: 300
-    // },
-    // {
-    //   id: 'highPink',
-    //   gain: 0.4,
-    //   highpassFreq: 10000,
-    //   lowpassFreq: 12000
-    // }
   ])
-
-  const filterRanges = {
-    lowPink: {
-      lowpass: {
-        min: 0,
-        max: 70
-      },
-      highpass: {
-        min: 0,
-        max: 70
-      }
-    }
-    // midPink: {
-    //   min: 80,
-    //   max: 5000
-    // },
-    // highPink: {
-    //   min: 8000,
-    //   max: 14000
-    // }
-  }
 
   // todo
   useEffect(() => {
