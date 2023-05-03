@@ -5,6 +5,11 @@ export const createAudioNodes = (track, context) => {
   track.highpassFilter = context.createBiquadFilter()
 }
 
+// pink noise audio buffer code is adapted from Paul Kellet's refined method
+// https://www.firstpr.com.au/dsp/pink-noise/
+// referenced in Zach Denton's Noisehack blog
+// https://noisehack.com/generate-noise-web-audio-api/
+
 export const createPinkNoiseAudioBuffer = (audioSource, context) => {
   const bufferSize = 5 * context.sampleRate
   const buffer = context.createBuffer(1, bufferSize, context.sampleRate)
@@ -46,10 +51,14 @@ export const setAudioNodeParams = (
   highpassFilter.frequency.value = highpassFreq
 }
 
-export const connectAudioNodes = (track, out, destination) => {
-  track.audioSource.connect(track.gainNode)
-  track.gainNode.connect(track.lowpassFilter)
-  track.lowpassFilter.connect(track.highpassFilter)
-  track.highpassFilter.connect(out)
+export const connectAudioNodes = (
+  { audioSource, gainNode, lowpassFilter, highpassFilter },
+  out,
+  destination
+) => {
+  audioSource.connect(gainNode)
+  gainNode.connect(lowpassFilter)
+  lowpassFilter.connect(highpassFilter)
+  highpassFilter.connect(out)
   out.connect(destination)
 }

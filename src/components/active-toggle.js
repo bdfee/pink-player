@@ -1,8 +1,5 @@
-const ActiveToggle = ({ isRunning, setIsRunning, setShowSection }) => {
-  const handleStart = () => {
-    setIsRunning(!isRunning)
-    setShowSection(!isRunning ? 'audio' : '')
-  }
+const ActiveToggle = ({ isRunning, setIsRunning }) => {
+  const handleStart = () => setIsRunning(!isRunning)
 
   const stopStyle = { backgroundColor: 'black', color: 'white' }
   const startStyle = { backgroundColor: 'black', color: 'white' }
