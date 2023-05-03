@@ -1,21 +1,21 @@
 export const filterRanges = {
   rumble: {
     lowpass: {
-      min: 0,
+      min: 1,
       max: 70
     },
     highpass: {
-      min: 0,
+      min: 1,
       max: 70
     }
   },
   low: {
     lowpass: {
-      min: 0,
+      min: 1,
       max: 70
     },
     highpass: {
-      min: 0,
+      min: 1,
       max: 70
     }
   },

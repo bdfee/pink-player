@@ -87,12 +87,8 @@ const AudioParameters = ({ isRunning }) => {
     Object.values(audio.graph.tracks).map((track) => track.audioSource.stop())
   }
 
-  const tempStyle = {
-    background: '#feeee8'
-  }
-
   return (
-    <div className="audio-controls" style={tempStyle}>
+    <div className="audio-controls">
       <div className="gain-sliders-container">
         {trackParams.map((params) => {
           return (
