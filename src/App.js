@@ -1,11 +1,7 @@
-import Container from './components/container'
+import Audio from './components/audio/index'
 
 function App() {
-  return (
-    <div className="App">
-      <Container />
-    </div>
-  )
+  return <Audio />
 }
 
 export default App
