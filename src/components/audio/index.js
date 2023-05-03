@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import TracksGain from './tracks-gain'
 import TracksFilter from './tracks-filter'
-import { filterRanges } from './trackDefaults'
+import { filterRanges } from '../../helpers/trackDefaults'
 import './index.css'
 
 import {
@@ -9,8 +9,9 @@ import {
   createPinkNoiseAudioBuffer,
   setAudioNodeParams,
   connectAudioNodes
-} from './audio.helpers'
+} from '../../helpers/audio.helpers'
 import TracksFilterToggle from './tracks-filter-toggle'
+import ActiveToggle from './active-toggle'
 
 // will try to run once on load, cannot initialize before user action per web audio
 const audioContext = new AudioContext()
@@ -24,7 +25,8 @@ const audio = {
   }
 }
 
-const AudioParameters = ({ isRunning }) => {
+const AudioParameters = () => {
+  const [isRunning, setIsRunning] = useState(false)
   // state parameters of ui, values used to rebuild the audio object in handleStart and map the filter components
   const [showFilter, setShowFilter] = useState('lowPink')
   const [trackParams, setTrackParams] = useState([
@@ -134,6 +136,7 @@ const AudioParameters = ({ isRunning }) => {
             )
           })}
         </div>
+        <ActiveToggle isRunning={isRunning} setIsRunning={setIsRunning} />
       </div>
     </div>
   )
