@@ -53,6 +53,7 @@ export const setAudioNodeParams = (
 
 export const connectAudioNodes = (
   { audioSource, gainNode, lowpassFilter, highpassFilter },
+  analyser,
   out,
   destination
 ) => {
@@ -61,4 +62,9 @@ export const connectAudioNodes = (
   lowpassFilter.connect(highpassFilter)
   highpassFilter.connect(out)
   out.connect(destination)
+}
+
+export const createAnalyserNode = (graph, context) => {
+  graph.analyser = context.createAnalyser()
+  graph.analyser.fftSize = 2048
 }
