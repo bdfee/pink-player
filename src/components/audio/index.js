@@ -9,72 +9,25 @@ import {
   createPinkNoiseAudioBuffer,
   setAudioNodeParams,
   connectAudioNodes
-} from '../../helpers/audio.helpers'
+} from '../../helpers/audioHelpers'
+import { defaultParams } from '../../helpers/trackDefaults'
 import TracksFilterToggle from './tracks-filter-toggle'
 import ActiveToggle from './active-toggle'
-
-// will try to run once on load, cannot initialize before user action per web audio
-const audioContext = new AudioContext()
-const gainNode = audioContext.createGain()
-// this context and audio graph will be assembled in the audio obj
-const audio = {
-  context: audioContext,
-  graph: {
-    out: gainNode,
-    tracks: {}
-  }
-}
+import { audio } from './audioObject'
 
 const AudioParameters = () => {
   const [isRunning, setIsRunning] = useState(false)
   // state parameters of ui, values used to rebuild the audio object in handleStart and map the filter components
   const [showFilter, setShowFilter] = useState('lowPink')
-  const [trackParams, setTrackParams] = useState([
-    {
-      id: 'rumble',
-      name: 'rumble',
-      gain: 0.6,
-      highpassFreq: 30,
-      lowpassFreq: 60
-    },
-    {
-      id: 'low',
-      name: 'low',
-      gain: 0.6,
-      highpassFreq: 60,
-      lowpassFreq: 200
-    },
-    {
-      id: 'midLow',
-      name: 'wind',
-      gain: 0.1,
-      highpassFreq: 200,
-      lowpassFreq: 500
-    },
-    {
-      id: 'midHigh',
-      name: 'rain',
-      gain: 0.1,
-      highpassFreq: 500,
-      lowpassFreq: 3000
-    },
-    {
-      id: 'high',
-      name: 'hiss',
-      gain: 0.4,
-      highpassFreq: 10000,
-      lowpassFreq: 12000
-    }
-  ])
+  const [trackParams, setTrackParams] = useState(defaultParams)
 
-  // todo
   useEffect(() => {
     !isRunning ? handleStop() : handleStart()
   }, [isRunning])
 
   const handleStart = () => {
     audio.graph.out.gain.value = 0.8
-    // map params from inital or user defined state into audio on start
+    // map params from inital state into audio object on start
     trackParams.map((params) => {
       const track = (audio.graph.tracks[params.id] = {})
       createAudioNodes(track, audio.context)
@@ -90,44 +43,16 @@ const AudioParameters = () => {
   }
 
   return (
-    <div className="audio-controls">
-      <div className="gain-sliders-container">
-        {trackParams.map((params) => {
-          return (
-            <TracksGain
-              key={params.id}
-              showFilter={showFilter}
-              setShowFilter={setShowFilter}
-              params={params}
-              trackParams={trackParams}
-              setParams={setTrackParams}
-              trackNodes={audio.graph.tracks[params.id]}
-              context={audio.context}
-            />
-          )
-        })}
-      </div>
-      <div className="filters">
-        <div className="filter-toggle-row">
+    <>
+      <div className="audio-controls">
+        <div className="gain-sliders-container">
           {trackParams.map((params) => {
             return (
-              <TracksFilterToggle
+              <TracksGain
                 key={params.id}
                 showFilter={showFilter}
                 setShowFilter={setShowFilter}
                 params={params}
-              />
-            )
-          })}
-        </div>
-        <div>
-          {trackParams.map((params) => {
-            return (
-              <TracksFilter
-                key={params.id}
-                showFilter={showFilter}
-                params={params}
-                rangeDefaults={filterRanges[params.id]}
                 trackParams={trackParams}
                 setParams={setTrackParams}
                 trackNodes={audio.graph.tracks[params.id]}
@@ -136,9 +61,39 @@ const AudioParameters = () => {
             )
           })}
         </div>
+        <div className="filters">
+          <div className="filter-toggle-row">
+            {trackParams.map((params) => {
+              return (
+                <TracksFilterToggle
+                  key={params.id}
+                  showFilter={showFilter}
+                  setShowFilter={setShowFilter}
+                  params={params}
+                />
+              )
+            })}
+          </div>
+          <div>
+            {trackParams.map((params) => {
+              return (
+                <TracksFilter
+                  key={params.id}
+                  showFilter={showFilter}
+                  params={params}
+                  rangeDefaults={filterRanges[params.id]}
+                  trackParams={trackParams}
+                  setParams={setTrackParams}
+                  trackNodes={audio.graph.tracks[params.id]}
+                  context={audio.context}
+                />
+              )
+            })}
+          </div>
+        </div>
         <ActiveToggle isRunning={isRunning} setIsRunning={setIsRunning} />
       </div>
-    </div>
+    </>
   )
 }
 
