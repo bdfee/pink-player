@@ -1,2 +1,2 @@
-pink noise generator
-#webaudio
+5 band pink noise generator
+#webaudio #react
