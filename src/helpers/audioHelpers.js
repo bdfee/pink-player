@@ -1,3 +1,4 @@
+// track is a skeleton audio object when passed in here, and returns with audio nodes
 export const createAudioNodes = (track, context) => {
   track.audioSource = context.createBufferSource()
   track.gainNode = context.createGain()
@@ -5,12 +6,12 @@ export const createAudioNodes = (track, context) => {
   track.highpassFilter = context.createBiquadFilter()
 }
 
-// pink noise audio buffer code is adapted from Paul Kellet's refined method
-// https://www.firstpr.com.au/dsp/pink-noise/
-// referenced in Zach Denton's Noisehack blog
-// https://noisehack.com/generate-noise-web-audio-api/
-
 export const createPinkNoiseAudioBuffer = (audioSource, context) => {
+  // pink noise audio buffer code is adapted from Paul Kellet's refined method
+  // https://www.firstpr.com.au/dsp/pink-noise/
+  // referenced in Zach Denton's Noisehack blog
+  // https://noisehack.com/generate-noise-web-audio-api/
+
   const bufferSize = 5 * context.sampleRate
   const buffer = context.createBuffer(1, bufferSize, context.sampleRate)
   const output = buffer.getChannelData(0)
@@ -39,6 +40,8 @@ export const createPinkNoiseAudioBuffer = (audioSource, context) => {
   audioSource.buffer = buffer
 }
 
+// end of adapted code
+
 export const setAudioNodeParams = (
   { gainNode, audioSource, lowpassFilter, highpassFilter },
   { gain, lowpassFreq, highpassFreq }
@@ -61,4 +64,9 @@ export const connectAudioNodes = (
   lowpassFilter.connect(highpassFilter)
   highpassFilter.connect(out)
   out.connect(destination)
+}
+
+export const reverseHighpassValue = (value, hpMin, hpMax) => {
+  const percent = (value - hpMin) / (hpMax - hpMin)
+  return percent * (hpMin - hpMax) + hpMax
 }

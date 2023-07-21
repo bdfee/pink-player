@@ -1,4 +1,2 @@
-deep
-
-pink noise generator, timer, and simple categories.
+pink noise generator
 #webaudio

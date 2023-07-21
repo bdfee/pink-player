@@ -1,4 +1,5 @@
 import { isMobile } from 'react-device-detect'
+import { reverseHighpassValue } from '../../helpers/audioHelpers'
 
 const TracksFilter = ({
   params,
@@ -28,7 +29,7 @@ const TracksFilter = ({
           trackNodes.lowpassFilter.frequency.value = value
           break
         case 'highpassFreq':
-          trackNodes.highpassFilter.frequency.value = reverseHighpassValue(value)
+          trackNodes.highpassFilter.frequency.value = reverseHighpassValue(value, hpMin, hpMax)
           break
       }
     }
@@ -45,11 +46,6 @@ const TracksFilter = ({
 
   const display = {
     display: showFilter === id ? 'flex' : 'none'
-  }
-
-  const reverseHighpassValue = (value) => {
-    const percent = (value - hpMin) / (hpMax - hpMin)
-    return percent * (hpMin - hpMax) + hpMax
   }
 
   const mobileClass = isMobile ? '-mobile' : ''

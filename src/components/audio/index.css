@@ -1,16 +1,16 @@
-input[type="range"][orient="vert"] {
+input[type='range'][orient='vert'] {
   appearance: none;
-  transform: rotate(0DEG);
+  transform: rotate(0deg);
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   width: 160px;
-  border: solid #AFABAB;
+  border: solid #afabab;
   border-radius: 5px;
 }
 
-input[type="range"][orient="horizontal"]{
+input[type='range'][orient='horizontal'] {
   appearance: none;
-  border: solid  #AFABAB;
+  border: solid #afabab;
   border-radius: 5px;
 }
 
@@ -36,12 +36,12 @@ input:active {
 }
 
 .gain-slider-container-mobile {
-  transform: scale(3) rotate(270DEG);
+  transform: scale(3) rotate(270deg);
   flex-basis: auto;
 }
 
 .gain-slider-container {
-  transform: rotate(270DEG);
+  transform: rotate(270deg);
   flex-basis: auto;
 }
 
@@ -49,7 +49,7 @@ input:active {
 .filter-toggle {
   display: flex;
   align-items: center;
-  border: solid #AFABAB;
+  border: solid #afabab;
   padding: 0 4vw;
   cursor: pointer;
   background: white;
@@ -62,16 +62,16 @@ input:active {
 }
 
 .filter-slider-container-mobile {
-  transform: scale(2.5)
+  transform: scale(2.5);
 }
 
 .filter-reverse-slider-container-mobile {
-  transform: scale(2.5) rotate(180DEG);
+  transform: scale(2.5) rotate(180deg);
   margin-bottom: 10px;
 }
 
 .filter-reverse-slider-container {
-  transform: rotate(180DEG);
+  transform: rotate(180deg);
   margin-bottom: 1vh;
 }
 
@@ -101,7 +101,7 @@ input:active {
 }
 
 .low {
-  accent-color: #D48987;
+  accent-color: #d48987;
 }
 
 .midLow {
@@ -109,11 +109,11 @@ input:active {
 }
 
 .midHigh {
-  accent-color: blue
+  accent-color: rgb(114, 114, 192);
 }
 
 .high {
-  accent-color: gray
+  accent-color: gray;
 }
 
 .toggle-rumble {
@@ -121,7 +121,7 @@ input:active {
 }
 
 .toggle-low {
-  background: #D48987;
+  background: #d48987;
 }
 
 .toggle-midLow {
@@ -129,9 +129,34 @@ input:active {
 }
 
 .toggle-midHigh {
-  background: blue
+  background: rgb(114, 114, 192);
 }
 
 .toggle-high {
-  background: gray
+  background: gray;
+}
+
+.start-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid rgb(180, 136, 143);
+  color: rgb(180, 136, 143);
+  background-color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.start-btn:hover {
+  background-color: rgb(180, 136, 143);
+  color: #fff;
+}
+
+.start {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
 }

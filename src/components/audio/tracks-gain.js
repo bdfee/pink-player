@@ -3,10 +3,10 @@ import { isMobile } from 'react-device-detect'
 const TracksGain = ({ params, trackParams, setParams, trackNodes, context }) => {
   const { id, gain } = params
 
-  const handleSetParams = (e) => {
-    const value = Number(e.target.value)
-    const id = e.target.parentElement.id
-    const property = e.target.name
+  const handleSetParams = (target) => {
+    const value = Number(target.value)
+    const id = target.parentElement.id
+    const property = target.name
     // apply value directly to audio
     if (trackNodes !== undefined) {
       switch (property) {
@@ -42,8 +42,8 @@ const TracksGain = ({ params, trackParams, setParams, trackNodes, context }) => 
         max={0.7}
         step={0.01}
         value={gain}
-        onChange={(e) => {
-          handleSetParams(e)
+        onChange={({ target }) => {
+          handleSetParams(target)
         }}></input>
     </div>
   )
