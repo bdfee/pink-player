@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/pink-player/static/css/main.b890405c.css",
+    "main.js": "/pink-player/static/js/main.75a6934c.js",
+    "index.html": "/pink-player/index.html",
+    "main.b890405c.css.map": "/pink-player/static/css/main.b890405c.css.map",
+    "main.75a6934c.js.map": "/pink-player/static/js/main.75a6934c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b890405c.css",
+    "static/js/main.75a6934c.js"
+  ]
+}
